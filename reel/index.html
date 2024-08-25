@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTok Clone</title>
+    <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  </head>
+  <body>
+
+
+
+
+
+
+    <div class="app__videos">
+      <!-- video starts -->
+      <div class="video">
+        <video class="video__player" src="video/video1.mp4"></video>
+
+        <!-- sidebar -->
+        <div class="videoSidebar">
+          <div class="videoSidebar__button">
+            <span class="material-icons"> favorite_border </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> message </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> share </span>
+            <p></p>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="videoFooter">
+          <div class="videoFooter__text">
+            <h3></h3>
+            <p class="videoFooter__description"></p>
+
+            <div class="videoFooter__ticker">
+             <!-- <span class="material-icons videoFooter__icon"> music_note </span>
+              <marquee>Song name</marquee> -->
+            </div>
+          </div>
+          <img
+            src="https://static.thenounproject.com/png/934821-200.png"
+            alt=""
+            class="videoFooter__record"
+          />
+        </div>
+      </div>
+      <!-- video ends -->
+
+      <!-- video starts -->
+      <div class="video">
+        <video class="video__player" src="video/video2.mp4"></video>
+
+        <!-- sidebar -->
+        <div class="videoSidebar">
+          <div class="videoSidebar__button">
+            <span class="material-icons"> favorite_border </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> message </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> share </span>
+            <p></p>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="videoFooter">
+          <div class="videoFooter__text">
+            <h3></h3>
+            <p class="videoFooter__description"></p>
+
+            <div class="videoFooter__ticker">
+             <!-- <span class="material-icons videoFooter__icon"> music_note </span>
+              <marquee>Song name</marquee> -->
+            </div>
+          </div>
+          <img
+            src="https://static.thenounproject.com/png/934821-200.png"
+            alt=""
+            class="videoFooter__record"
+          />
+        </div>
+      </div>
+
+ <div class="video">
+        <video class="video__player" src="video/video3.mp4"></video>
+
+        <!-- sidebar -->
+        <div class="videoSidebar">
+          <div class="videoSidebar__button">
+            <span class="material-icons"> favorite_border </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> message </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> share </span>
+            <p></p>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="videoFooter">
+          <div class="videoFooter__text">
+            <h3></h3>
+            <p class="videoFooter__description"></p>
+
+            <div class="videoFooter__ticker">
+             <!-- <span class="material-icons videoFooter__icon"> music_note </span>
+              <marquee>Song name</marquee> -->
+            </div>
+          </div>
+          <img
+            src="https://static.thenounproject.com/png/934821-200.png"
+            alt=""
+            class="videoFooter__record"
+          />
+        </div>
+      </div>
+
+ <div class="video">
+        <video class="video__player" src="video/video4.mp4"></video>
+
+        <!-- sidebar -->
+        <div class="videoSidebar">
+          <div class="videoSidebar__button">
+            <span class="material-icons"> favorite_border </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> message </span>
+            <p></p>
+          </div>
+
+          <div class="videoSidebar__button">
+            <span class="material-icons"> share </span>
+            <p></p>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <div class="videoFooter">
+          <div class="videoFooter__text">
+            <h3></h3>
+            <p class="videoFooter__description"></p>
+
+            <div class="videoFooter__ticker">
+             <!-- <span class="material-icons videoFooter__icon"> music_note </span>
+              <marquee>Song name</marquee> -->
+            </div>
+          </div>
+          <img
+            src="https://static.thenounproject.com/png/934821-200.png"
+            alt=""
+            class="videoFooter__record"
+          />
+        </div>
+      </div>
+
+      <!-- video ends -->
+    </div>
+
+<script>
+  const videos = document.querySelectorAll('video');
+  const appVideos = document.querySelector('.app__videos');
+  const videoCount = videos.length;
+  const videoHeight = videos[0].offsetHeight;
+
+  // Play/pause videos based on visibility
+  appVideos.addEventListener('scroll', function () {
+    videos.forEach((video) => {
+      const rect = video.getBoundingClientRect();
+      
+      // Play the video if it is at least halfway visible
+      if (rect.top >= 0 && rect.bottom - window.innerHeight / 2 <= window.innerHeight) {
+        video.play();
+      } else {
+        video.pause();
+        
+        // Reset the video after a slight delay to avoid abrupt resets
+        setTimeout(() => {
+          if (video.paused) {
+            video.currentTime = 0;
+          }
+        }, 200); // Adjust delay as necessary
+      }
+    });
+
+    // Loop scroll behavior
+    const scrollPosition = appVideos.scrollTop;
+    const totalHeight = appVideos.scrollHeight;
+    const visibleHeight = appVideos.clientHeight;
+
+    if (scrollPosition + visibleHeight >= totalHeight - 3) { // Adjust threshold as needed
+      setTimeout(() => {
+        appVideos.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 500); // Delay to allow the user to stop scrolling
+    }
+  });
+
+  // Toggle video play/pause on click
+  for (const video of videos) {
+    video.addEventListener('click', function () {
+      if (video.paused) {
+        video.play();
+      } else {
+        video.pause();
+      }
+    });
+  }
+</script>
+
+     <footer class="footer">
+    <button class="home-button" onclick="goToHome()">Go Back to Home</button>
+  </footer>
+
+  <script>
+    // Video control script here
+
+    // Function to navigate to home
+    function goToHome() {
+      window.location.href = '../index.html'; // Change 'index.html' to your home page's URL
+    }
+  </script>
+
+  <style>
+
+    @import url("https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+:root {
+    --font-1: "Public Sans", Sans-serif;
+    --font-2: "Castoro", Serif;
+
+  /* monospace
+   */
+    --font-mono: Consolas, "Andale Mono", Courier, "Courier New", monospace;
+}
+
+
+    .footer {
+  background-color: rgba(51, 51, 51, 0.5); /* Semi-transparent background */
+  backdrop-filter: blur(10px);
+  color: white;
+  padding: 8px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%; /* Make the footer span the full width of the screen */
+  max-width: 100%; /* Ensure it doesn't exceed the screen width */
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+  left: 0;
+  right: 0;
+}
+
+/* Optional: Add padding or change the design for smaller screens */
+@media (max-width: 600px) {
+  .footer {
+    padding: 12px;
+  }
+}
+
+.home-button {
+  display: inline-block;
+        --btn-height: var(--vspace-btn);
+        font-family: Arial, sans-serif; /* Replace with your font-family or variable */
+        font-weight: 500;
+        font-size: calc(16px * 0.6); /* Replace 16px with your base font size */
+        text-transform: uppercase;
+        letter-spacing: 0.3em;
+        height: var(--btn-height, 40px); /* Use variable or default to 40px */
+        line-height: calc(var(--btn-height, 40px) - 4px); /* Adjust line height based on height */
+        padding: 0 4rem; /* Increased horizontal padding */
+        margin: 0 0.4rem 0.5rem 0; /* Margin around the button */
+        color: #ffffff; /* Replace with your button text color variable */
+        text-decoration: none;
+        text-align: center;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.3s;
+        background-color: #d34133; /* Replace with your button background color variable */
+        border: 2px solid #d34133; /* Replace with your button border color variable */
+        -webkit-font-smoothing: antialiased; /* Smooth font rendering on webkit browsers */
+        box-sizing: border-box; /* Include padding and border in element's total width and height */
+        width: auto; /* Allow the width to adjust based on padding */
+}
+
+.home-button:hover, .home-button:focus {
+  background-color: orange; /* Highlight color on hover */
+        border-color: orange; /* Highlight border color on hover */
+}
+
+
+
+
+</style>
+
+
+  </body>
+</html>
