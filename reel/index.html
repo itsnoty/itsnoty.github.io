@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TikTok Clone</title>
+    <title>Vertical Content</title>
     <link rel="stylesheet" href="style.css" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
   </head>
@@ -18,7 +18,7 @@
     <div class="app__videos">
       <!-- video starts -->
       <div class="video">
-        <video class="video__player" src="video/video1.mp4"></video>
+        <video class="video__player" src="video/loreal.webm" playsinline ></video>
 
         <!-- sidebar -->
         <div class="videoSidebar">
@@ -60,7 +60,7 @@
 
       <!-- video starts -->
       <div class="video">
-        <video class="video__player" src="video/video2.mp4"></video>
+        <video class="video__player" src="video/Video3_1.webm" playsinline></video>
 
         <!-- sidebar -->
         <div class="videoSidebar">
@@ -100,47 +100,7 @@
       </div>
 
  <div class="video">
-        <video class="video__player" src="video/video3.mp4"></video>
-
-        <!-- sidebar -->
-        <div class="videoSidebar">
-          <div class="videoSidebar__button">
-            <span class="material-icons"> favorite_border </span>
-            <p></p>
-          </div>
-
-          <div class="videoSidebar__button">
-            <span class="material-icons"> message </span>
-            <p></p>
-          </div>
-
-          <div class="videoSidebar__button">
-            <span class="material-icons"> share </span>
-            <p></p>
-          </div>
-        </div>
-
-        <!-- footer -->
-        <div class="videoFooter">
-          <div class="videoFooter__text">
-            <h3></h3>
-            <p class="videoFooter__description"></p>
-
-            <div class="videoFooter__ticker">
-             <!-- <span class="material-icons videoFooter__icon"> music_note </span>
-              <marquee>Song name</marquee> -->
-            </div>
-          </div>
-          <img
-            src="https://static.thenounproject.com/png/934821-200.png"
-            alt=""
-            class="videoFooter__record"
-          />
-        </div>
-      </div>
-
- <div class="video">
-        <video class="video__player" src="video/video4.mp4"></video>
+        <video class="video__player" src="video/Video4_1.webm" playsinline></video>
 
         <!-- sidebar -->
         <div class="videoSidebar">
@@ -183,57 +143,58 @@
     </div>
 
 <script>
-  const videos = document.querySelectorAll('video');
-  const appVideos = document.querySelector('.app__videos');
-  const videoCount = videos.length;
-  const videoHeight = videos[0].offsetHeight;
+  document.addEventListener('DOMContentLoaded', function () {
+    const videos = document.querySelectorAll('video');
+    const appVideos = document.querySelector('.app__videos');
 
-  // Play/pause videos based on visibility
-  appVideos.addEventListener('scroll', function () {
-    videos.forEach((video) => {
-      const rect = video.getBoundingClientRect();
-      
-      // Play the video if it is at least halfway visible
-      if (rect.top >= 0 && rect.bottom - window.innerHeight / 2 <= window.innerHeight) {
-        video.play();
-      } else {
-        video.pause();
-        
-        // Reset the video after a slight delay to avoid abrupt resets
+    // Play/pause videos based on visibility
+    appVideos.addEventListener('scroll', function () {
+      videos.forEach((video) => {
+        const rect = video.getBoundingClientRect();
+
+        // Play the video if it's at least halfway visible
+        if (rect.top >= 0 && rect.bottom <= (window.innerHeight + rect.height) / 2) {
+          video.play();
+        } else {
+          video.pause();
+          
+          // Reset video after a delay to avoid abrupt resets
+          setTimeout(() => {
+            if (video.paused) {
+              video.currentTime = 0;
+            }
+          }, 200); // Adjust delay as necessary
+        }
+      });
+
+      // Loop scroll behavior
+      const scrollPosition = appVideos.scrollTop;
+      const totalHeight = appVideos.scrollHeight;
+      const visibleHeight = appVideos.clientHeight;
+
+      if (scrollPosition + visibleHeight >= totalHeight - 3) { // Adjust threshold as needed
         setTimeout(() => {
-          if (video.paused) {
-            video.currentTime = 0;
-          }
-        }, 200); // Adjust delay as necessary
+          appVideos.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        }, 500); // Delay to allow the user to stop scrolling
       }
     });
 
-    // Loop scroll behavior
-    const scrollPosition = appVideos.scrollTop;
-    const totalHeight = appVideos.scrollHeight;
-    const visibleHeight = appVideos.clientHeight;
-
-    if (scrollPosition + visibleHeight >= totalHeight - 3) { // Adjust threshold as needed
-      setTimeout(() => {
-        appVideos.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }, 500); // Delay to allow the user to stop scrolling
-    }
+    // Toggle video play/pause on click
+    videos.forEach(video => {
+      video.addEventListener('click', function () {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      });
+    });
   });
-
-  // Toggle video play/pause on click
-  for (const video of videos) {
-    video.addEventListener('click', function () {
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-    });
-  }
 </script>
+
 
      <footer class="footer">
     <button class="home-button" onclick="goToHome()">Go Back to Home</button>
@@ -314,6 +275,28 @@
         border-color: orange; /* Highlight border color on hover */
 }
 
+/* Prevent horizontal scrolling */
+body {
+  overflow-x: hidden;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Apply only to mobile devices */
+@media (max-width: 600px) {
+  body {
+    position: relative;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+  
+  .app__videos {
+    overflow-x: hidden; /* Ensure the container doesn't cause horizontal scroll */
+  }
+}
 
 
 
